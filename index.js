@@ -46,6 +46,11 @@ function displayBooks() {
 
     haveRead.addEventListener("click", () => {
       book.toggleReadStatus();
+      if (book.haveRead) {
+        haveRead.classList.add("haveRead");
+      } else {
+        haveRead.classList.remove("haveRead");
+      }
       displayBooks();
     });
 
@@ -53,6 +58,13 @@ function displayBooks() {
       book.removeBook();
       displayBooks();
     });
+
+    bookDiv.classList.add("bookCard");
+    haveRead.classList.add("readStatusBtn");
+    if (book.haveRead) {
+      haveRead.classList.add("haveRead");
+    }
+    remove.classList.add("removeBtn");
 
     bookDiv.appendChild(title);
     bookDiv.appendChild(author);
@@ -91,3 +103,7 @@ addBookForm.addEventListener("submit", (e) => {
   displayBooks();
   formGoAway();
 });
+
+const example = new Book("testTitle", "testAuthor", 120, true);
+example.addBook();
+displayBooks();
