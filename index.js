@@ -1,4 +1,8 @@
-const library = document.querySelector(".library");
+const booksGrid = document.querySelector(".booksGrid");
+const addBookBtn = document.querySelector(".addBookBtn");
+const addBookModal = document.querySelector(".addBook");
+const addBookForm = document.querySelector(".form");
+const overlay = document.querySelector("#overlay");
 
 let myLibrary = [];
 
@@ -7,17 +11,16 @@ function Book(title, author, pages, haveRead) {
   this.author = author;
   this.pages = pages;
   this.haveRead = haveRead;
-}
 
-function addBookToLibrary(title, author, pages, haveRead) {
-  const newBook = Book(title, author, pages, haveRead);
-  myLibrary.push(newBook);
+  this.addBook = () => {
+    console.log(this);
+    myLibrary.push(this);
+  };
 }
 
 function displayBooks() {
+  booksGrid.innerHTML = "";
   myLibrary.forEach((book) => {
-    console.log(myLibrary);
-    console.log(book);
     const bookDiv = document.createElement("div");
 
     const title = document.createElement("div");
@@ -38,6 +41,34 @@ function displayBooks() {
     bookDiv.appendChild(haveRead);
     bookDiv.appendChild(remove);
 
-    library.appendChild(bookDiv);
+    booksGrid.appendChild(bookDiv);
   });
 }
+
+function formPopUp() {
+  addBookModal.classList.add("active");
+  overlay.classList.add("active");
+}
+
+function formGoAway() {
+  addBookForm.reset();
+  addBookModal.classList.remove("active");
+  overlay.classList.remove("active");
+}
+
+addBookBtn.addEventListener("click", () => {
+  formPopUp();
+});
+
+addBookForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const newBook = new Book(
+    e.target.title.value,
+    e.target.author.value,
+    e.target.pages.value,
+    e.target.haveRead.checked
+  );
+  newBook.addBook();
+  displayBooks();
+  formGoAway();
+});

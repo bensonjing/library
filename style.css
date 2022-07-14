@@ -46,3 +46,33 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+/* Add Book Form */
+.addBook {
+  background-color: white;
+  position: fixed; 
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 1;
+}
+
+.addBook.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+#overlay {
+  background-color: rgba(0, 0, 0, .5);
+  position: fixed; 
+  opacity: 0;
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1; 
+  pointer-events: all;
+}
