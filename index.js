@@ -21,6 +21,10 @@ function Book(title, author, pages, haveRead) {
       return book.title !== this.title || book.author !== this.author;
     });
   };
+
+  this.toggleReadStatus = () => {
+    this.haveRead = this.haveRead ? false : true;
+  };
 }
 
 function displayBooks() {
@@ -39,6 +43,11 @@ function displayBooks() {
     pages.textContent = `${book.pages} pages`;
     haveRead.textContent = book.haveRead ? "Read" : "Not Read";
     remove.textContent = "Remove";
+
+    haveRead.addEventListener("click", () => {
+      book.toggleReadStatus();
+      displayBooks();
+    });
 
     remove.addEventListener("click", () => {
       book.removeBook();
