@@ -13,8 +13,13 @@ function Book(title, author, pages, haveRead) {
   this.haveRead = haveRead;
 
   this.addBook = () => {
-    console.log(this);
     myLibrary.push(this);
+  };
+
+  this.removeBook = () => {
+    myLibrary = myLibrary.filter((book) => {
+      return book.title !== this.title || book.author !== this.author;
+    });
   };
 }
 
@@ -34,6 +39,11 @@ function displayBooks() {
     pages.textContent = `${book.pages} pages`;
     haveRead.textContent = book.haveRead ? "Read" : "Not Read";
     remove.textContent = "Remove";
+
+    remove.addEventListener("click", () => {
+      book.removeBook();
+      displayBooks();
+    });
 
     bookDiv.appendChild(title);
     bookDiv.appendChild(author);
