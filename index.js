@@ -104,6 +104,6 @@ addBookForm.addEventListener("submit", (e) => {
   formGoAway();
 });
 
-const example = new Book("testTitle", "testAuthor", 120, true);
-example.addBook();
-displayBooks();
+overlay.addEventListener("click", () => {
+  formGoAway();
+});
